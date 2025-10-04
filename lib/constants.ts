@@ -7,7 +7,7 @@ export const NAV_ITEMS = [
 // Options du formulaire d'inscription
 export const INVESTMENT_GOALS = [
   { value: 'Growth', label: 'Croissance' },
-  { value: 'Income', label: 'Revenus' },
+  { value: 'Income', label: 'Revenu' },
   { value: 'Balanced', label: 'Équilibré' },
   { value: 'Conservative', label: 'Conservateur' },
 ];
