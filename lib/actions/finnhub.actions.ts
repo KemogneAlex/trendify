@@ -5,6 +5,14 @@ import { getDateRange, validateArticle, formatArticle } from '@/lib/utils';
 import { POPULAR_STOCK_SYMBOLS } from '@/lib/constants';
 import { cache } from 'react';
 
+export interface StockWithWatchlistStatus {
+  symbol: string;
+  name: string;
+  exchange: string;
+  type: string;
+  isInWatchlist: boolean;
+}
+
 const FINNHUB_BASE_URL = 'https://finnhub.io/api/v1';
 const NEXT_PUBLIC_FINNHUB_API_KEY = process.env.NEXT_PUBLIC_FINNHUB_API_KEY ?? '';
 
@@ -101,7 +109,10 @@ export const searchStocks = cache(async (query?: string): Promise<StockWithWatch
   try {
     const token = process.env.FINNHUB_API_KEY ?? NEXT_PUBLIC_FINNHUB_API_KEY;
     if (!token) {
-      console.error('Erreur dans la recherche d\'actions :', new Error('Clé API FINNHUB non configurée'));
+      console.error(
+        "Erreur dans la recherche d'actions :",
+        new Error('Clé API FINNHUB non configurée')
+      );
       return [];
     }
 
@@ -159,7 +170,7 @@ export const searchStocks = cache(async (query?: string): Promise<StockWithWatch
         const exchangeFromDisplay = (r.displaySymbol as string | undefined) || undefined;
         const exchangeFromProfile = (r as any).__exchange as string | undefined;
         const exchange = exchangeFromDisplay || exchangeFromProfile || 'États-Unis';
-        const type = r.type === 'Common Stock' ? 'Action ordinaire' : (r.type || 'Action');
+        const type = r.type === 'Common Stock' ? 'Action ordinaire' : r.type || 'Action';
         const item: StockWithWatchlistStatus = {
           symbol: upper,
           name,
@@ -173,7 +184,7 @@ export const searchStocks = cache(async (query?: string): Promise<StockWithWatch
 
     return mapped;
   } catch (err) {
-    console.error('Erreur dans la recherche d\'actions :', err);
+    console.error("Erreur dans la recherche d'actions :", err);
     return [];
   }
 });
