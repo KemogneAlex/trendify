@@ -98,9 +98,17 @@ export const signUpWithEmail = async ({
     return result;
   } catch (e: unknown) {
     console.log("Échec de l'inscription", e);
+    
+    // Vérifier si l'erreur concerne un utilisateur existant
+    const errorMessage = e instanceof Error 
+      ? e.message.includes('already exists') || e.message.includes('déjà existant')
+        ? 'Un compte avec cette adresse email existe déjà. Essayez de vous connecter ou utilisez une autre adresse email.'
+        : e.message
+      : "Une erreur est survenue lors de l'inscription. Veuillez réessayer plus tard.";
+    
     return {
       success: false,
-      error: e instanceof Error ? e.message : "Échec de l'inscription",
+      error: errorMessage,
     };
   }
 };
