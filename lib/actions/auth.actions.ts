@@ -3,6 +3,44 @@ import { inngest } from '@/lib/inngest/client';
 import { auth } from '@/lib/better-auth/auth';
 import { headers } from 'next/headers';
 
+type CookieOptions = {
+  httpOnly?: boolean;
+  secure?: boolean;
+  sameSite?: 'lax' | 'strict' | 'none';
+  maxAge?: number;
+  path?: string;
+  domain?: string;
+};
+
+type AuthResponse = {
+  user: {
+    id: string;
+    email: string;
+    name: string;
+    image?: string | null;
+    emailVerified: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+  };
+  token: string | null;
+  cookies?: Array<{
+    name: string;
+    value: string;
+    options: CookieOptions;
+  }>;
+};
+
+type ApiResponse<T = unknown> = {
+  success: boolean;
+  data?: T;
+  cookies?: Array<{
+    name: string;
+    value: string;
+    options: CookieOptions;
+  }>;
+  error?: string;
+};
+
 export const signUpWithEmail = async ({
   email,
   password,
@@ -11,18 +49,19 @@ export const signUpWithEmail = async ({
   investmentGoals,
   riskTolerance,
   preferredIndustry,
-}: SignUpFormData) => {
+}: SignUpFormData): Promise<ApiResponse<AuthResponse>> => {
   try {
     const response = await auth.api.signUpEmail({
       body: {
         email,
         password,
         name: fullName,
-        options: {
-          // Force la connexion automatique après l'inscription
-          autoSignIn: true
-        }
+        // Options de connexion
+        rememberMe: true, // Maintient la session
+        // L'option autoSignIn n'est pas disponible dans cette version de l'API
       }
+      // L'option autoSignIn n'est pas disponible à ce niveau
+      // La connexion automatique devra être gérée côté client si nécessaire
     });
 
     if (response) {
@@ -32,48 +71,90 @@ export const signUpWithEmail = async ({
       });
     }
 
-    return {
+    const result: ApiResponse<AuthResponse> = {
       success: true,
-      data: response,
-      // Inclure les cookies de session dans la réponse
-      cookies: response.cookies
+      data: response
     };
-  } catch (e: any) {
-    console.log('Échec de l\'inscription', e);
+
+    // Ajouter les cookies s'ils existent
+    if (response && 'cookies' in response && response.cookies) {
+      const cookies = Array.isArray(response.cookies) 
+        ? response.cookies 
+        : [response.cookies];
+        
+      result.cookies = cookies.map((cookie: { name: string; value: string; options?: Partial<CookieOptions> }) => ({
+        name: cookie.name,
+        value: cookie.value,
+        options: {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production',
+          sameSite: 'lax' as const,
+          path: '/',
+          ...(cookie.options || {})
+        }
+      }));
+    }
+
+    return result;
+  } catch (e: unknown) {
+    console.log("Échec de l'inscription", e);
     return {
       success: false,
-      error: e.message || 'Échec de l\'inscription'
+      error: e instanceof Error ? e.message : "Échec de l'inscription",
     };
   }
 };
 
-export const signInWithEmail = async ({ email, password }: SignInFormData) => {
+export const signInWithEmail = async ({ email, password }: SignInFormData): Promise<ApiResponse<AuthResponse>> => {
   try {
-    const response = await auth.api.signInEmail({ 
-      body: { email, password },
-      // Forcer une nouvelle session
-      options: {
-        isReauthenticate: false
+    const response = await auth.api.signInEmail({
+      body: { 
+        email, 
+        password,
+        // Options de connexion
+        rememberMe: true // Maintient la session
       }
+      // L'option isReauthenticate n'est pas disponible dans cette version de l'API
     });
-    
-    return { 
-      success: true, 
-      data: response,
-      cookies: response.cookies
+
+    const result: ApiResponse<AuthResponse> = {
+      success: true,
+      data: response
     };
-  } catch (e: any) {
+
+    // Ajouter les cookies s'ils existent
+    if (response && 'cookies' in response && response.cookies) {
+      const cookies = Array.isArray(response.cookies) 
+        ? response.cookies 
+        : [response.cookies];
+        
+      result.cookies = cookies.map((cookie: { name: string; value: string; options?: Partial<CookieOptions> }) => ({
+        name: cookie.name,
+        value: cookie.value,
+        options: {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production',
+          sameSite: 'lax' as const,
+          path: '/',
+          ...(cookie.options || {})
+        }
+      }));
+    }
+
+    return result;
+  } catch (e: unknown) {
     console.log('Échec de la connexion', e);
-    return { 
-      success: false, 
-      error: e.message || 'Échec de la connexion' 
+    return {
+      success: false,
+      error: e instanceof Error ? e.message : 'Échec de la connexion',
     };
   }
 };
 
-export const signOut = async () => {
+export const signOut = async (): Promise<{ success: boolean; error?: string }> => {
   try {
     await auth.api.signOut({ headers: await headers() });
+    return { success: true };
   } catch (e) {
     console.log('Échec de la déconnexion', e);
     return { success: false, error: 'Échec de la déconnexion' };
