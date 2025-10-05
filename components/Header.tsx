@@ -3,7 +3,7 @@ import Image from 'next/image';
 import NavItems from './NavItems';
 import UserDropdown from './UserDropdown';
 
-const Header = () => {
+const Header = async ({ user }: { user: User }) => {
   return (
     <header className='header sticky top-0'>
       <div className='header-wrapper container'>
@@ -15,7 +15,7 @@ const Header = () => {
             height={32}
             className='h-8 w-8 cursor-pointer'
           />
-          <span className='text-xl font-bold bg-gradient-to-r from-blue-500 to-emerald-400 bg-clip-text text-transparent'>
+          <span className='bg-gradient-to-r from-blue-500 to-emerald-400 bg-clip-text text-xl font-bold text-transparent'>
             Trendify
           </span>
         </Link>
@@ -23,7 +23,7 @@ const Header = () => {
           <NavItems />
         </nav>
 
-        <UserDropdown />
+        <UserDropdown user={user} />
       </div>
     </header>
   );

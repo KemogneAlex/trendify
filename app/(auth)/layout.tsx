@@ -1,11 +1,18 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { auth } from '@/lib/better-auth/auth';
+import { redirect } from 'next/navigation';
+import { headers } from 'next/headers';
 
 const Layout = async ({ children }: { children: React.ReactNode }) => {
+  const session = await auth.api.getSession({ headers: await headers() });
+
+  if (session?.user) redirect('/');
+
   return (
     <main className='auth-layout'>
       <section className='auth-left-section scrollbar-hide-default'>
-        <Link href='/' className='auth-logo flex items-center space-x-2 mb-8'>
+        <Link href='/' className='auth-logo mb-8 flex items-center space-x-2'>
           <Image
             src='/assets/icons/logo.svg'
             alt='Logo Trendify'
@@ -13,7 +20,7 @@ const Layout = async ({ children }: { children: React.ReactNode }) => {
             height={32}
             className='h-8 w-8'
           />
-          <span className='text-2xl font-bold bg-gradient-to-r from-blue-500 to-emerald-400 bg-clip-text text-transparent'>
+          <span className='bg-gradient-to-r from-blue-500 to-emerald-400 bg-clip-text text-2xl font-bold text-transparent'>
             Trendify
           </span>
         </Link>

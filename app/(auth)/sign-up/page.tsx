@@ -6,7 +6,12 @@ import { CountrySelectField } from '@/components/forms/CountrySelectField';
 import SelectField from '@/components/forms/SelectField';
 import { INVESTMENT_GOALS, RISK_TOLERANCE_OPTIONS, PREFERRED_INDUSTRIES } from '@/lib/constants';
 import FooterLink from '@/components/forms/FooterLink';
+import { signUpWithEmail } from '@/lib/actions/auth.actions';
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
+
 const SignUp = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -27,11 +32,19 @@ const SignUp = () => {
 
   const onSubmit = async (data: SignUpFormData) => {
     try {
-      console.log(data);
+      const result = await signUpWithEmail(data);
+      if (result.success) {
+        toast.success('Inscription réussie');
+        router.push('/');
+      }
     } catch (e) {
       console.error(e);
+      toast.error('Échec de l’inscription', {
+        description: e instanceof Error ? e.message : 'Impossible de créer un compte.',
+      });
     }
   };
+
   return (
     <>
       <h1 className='form-title'>Inscription et personnalisation</h1>
