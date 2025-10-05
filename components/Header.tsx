@@ -2,8 +2,10 @@ import Link from 'next/link';
 import Image from 'next/image';
 import NavItems from './NavItems';
 import UserDropdown from './UserDropdown';
+import { searchStocks } from '@/lib/actions/finnhub.actions';
 
 const Header = async ({ user }: { user: User }) => {
+  const initialStocks = await searchStocks();
   return (
     <header className='header sticky top-0'>
       <div className='header-wrapper container'>
@@ -20,10 +22,10 @@ const Header = async ({ user }: { user: User }) => {
           </span>
         </Link>
         <nav className='hidden sm:block'>
-          <NavItems />
+          <NavItems initialStocks={initialStocks} />
         </nav>
 
-        <UserDropdown user={user} />
+        <UserDropdown user={user} initialStocks={initialStocks} />
       </div>
     </header>
   );
