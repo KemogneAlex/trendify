@@ -94,10 +94,15 @@ export const WELCOME_EMAIL_TEMPLATE = `<!DOCTYPE html>
             <td align="center" class="mobile-outer-padding" style="padding: 40px 20px;">
                 <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" class="email-container" style="max-width: 600px; background-color: #141414; border-radius: 8px; border: 1px solid #30333A;">
                     
-                    <!-- Header with Logo -->
+                    <!-- Header with Logo and Name -->
                     <tr>
                         <td align="left" class="mobile-header-padding" style="padding: 40px 40px 20px 40px;">
-                            <img src="https://ik.imagekit.io/rg26rtb4f/logo.png?updatedAt=1759633220287" alt="Trendify Logo" width="150" style="max-width: 100%; height: auto;">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <img src="https://ik.imagekit.io/rg26rtb4f/logo.png?updatedAt=1759633220287" alt="Trendify Logo" width="40" style="display: block;">
+                                <span style="font-size: 28px; font-weight: 700; color: #FFFFFF; line-height: 1;">
+                                    Trendify
+                                </span>
+                            </div>
                         </td>
                     </tr>
                     
@@ -257,10 +262,15 @@ export const NEWS_SUMMARY_EMAIL_TEMPLATE = `<!DOCTYPE html>
             <td align="center" class="mobile-outer-padding" style="padding: 40px 20px;">
                 <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" class="email-container" style="max-width: 600px; background-color: #141414; border-radius: 8px; border: 1px solid #30333A;">
                     
-                    <!-- Header with Logo -->
+                    <!-- Header with Logo and Name -->
                     <tr>
                         <td align="left" class="mobile-header-padding" style="padding: 40px 40px 20px 40px;">
-                            <img src="https://ik.imagekit.io/rg26rtb4f/logo.png?updatedAt=1759633220287" alt="Trendify Logo" width="150" style="max-width: 100%; height: auto;">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <img src="https://ik.imagekit.io/rg26rtb4f/logo.png?updatedAt=1759633220287" alt="Trendify Logo" width="40" style="display: block;">
+                                <span style="font-size: 28px; font-weight: 700; color: #FFFFFF; line-height: 1;">
+                                    Trendify
+                                </span>
+                            </div>
                         </td>
                     </tr>
                     
@@ -407,10 +417,15 @@ export const STOCK_ALERT_UPPER_EMAIL_TEMPLATE = `<!DOCTYPE html>
             <td align="center" class="mobile-outer-padding" style="padding: 40px 20px;">
                 <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" class="email-container" style="max-width: 600px; background-color: #141414; border-radius: 8px; border: 1px solid #30333A;">
                     
-                    <!-- Header with Logo -->
+                    <!-- Header with Logo and Name -->
                     <tr>
                         <td align="left" class="mobile-header-padding" style="padding: 40px 40px 20px 40px;">
-                            <img src="https://ik.imagekit.io/rg26rtb4f/logo.png?updatedAt=1759633220287" alt="Trendify Logo" width="150" style="max-width: 100%; height: auto;">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <img src="https://ik.imagekit.io/rg26rtb4f/logo.png?updatedAt=1759633220287" alt="Trendify Logo" width="40" style="display: block;">
+                                <span style="font-size: 28px; font-weight: 700; color: #FFFFFF; line-height: 1;">
+                                    Trendify
+                                </span>
+                            </div>
                         </td>
                     </tr>
                     
@@ -616,10 +631,15 @@ export const STOCK_ALERT_LOWER_EMAIL_TEMPLATE = `<!DOCTYPE html>
             <td align="center" class="mobile-outer-padding" style="padding: 40px 20px;">
                 <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" class="email-container" style="max-width: 600px; background-color: #141414; border-radius: 8px; border: 1px solid #30333A;">
                     
-                    <!-- Header with Logo -->
+                    <!-- Header with Logo and Name -->
                     <tr>
                         <td align="left" class="mobile-header-padding" style="padding: 40px 40px 20px 40px;">
-                            <img src="https://ik.imagekit.io/rg26rtb4f/logo.png?updatedAt=1759633220287" alt="Trendify Logo" width="150" style="max-width: 100%; height: auto;">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <img src="https://ik.imagekit.io/rg26rtb4f/logo.png?updatedAt=1759633220287" alt="Trendify Logo" width="40" style="display: block;">
+                                <span style="font-size: 28px; font-weight: 700; color: #FFFFFF; line-height: 1;">
+                                    Trendify
+                                </span>
+                            </div>
                         </td>
                     </tr>
                     
@@ -816,10 +836,15 @@ export const VOLUME_ALERT_EMAIL_TEMPLATE = `<!DOCTYPE html>
             <td align="center" class="mobile-outer-padding" style="padding: 40px 20px;">
                 <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" class="email-container" style="max-width: 600px; background-color: #141414; border-radius: 8px; border: 1px solid #30333A;">
                     
-                    <!-- Header with Logo -->
+                    <!-- Header with Logo and Name -->
                     <tr>
                         <td align="left" class="mobile-header-padding" style="padding: 40px 40px 20px 40px;">
-                            <img src="https://ik.imagekit.io/rg26rtb4f/logo.png?updatedAt=1759633220287" alt="Trendify Logo" width="150" style="max-width: 100%; height: auto;">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <img src="https://ik.imagekit.io/rg26rtb4f/logo.png?updatedAt=1759633220287" alt="Trendify Logo" width="40" style="display: block;">
+                                <span style="font-size: 28px; font-weight: 700; color: #FFFFFF; line-height: 1;">
+                                    Trendify
+                                </span>
+                            </div>
                         </td>
                     </tr>
                     
@@ -1039,10 +1064,15 @@ export const INACTIVE_USER_REMINDER_EMAIL_TEMPLATE = `<!DOCTYPE html>
             <td align="center" class="mobile-outer-padding" style="padding: 40px 20px;">
                 <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" class="email-container" style="max-width: 600px; background-color: #141414; border-radius: 8px; border: 1px solid #30333A;">
                     
-                    <!-- Header with Logo -->
+                    <!-- Header with Logo and Name -->
                     <tr>
                         <td align="left" class="mobile-header-padding" style="padding: 40px 40px 20px 40px;">
-                            <img src="https://ik.imagekit.io/rg26rtb4f/logo.png?updatedAt=1759633220287" alt="Trendify Logo" width="150" style="max-width: 100%; height: auto;">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <img src="https://ik.imagekit.io/rg26rtb4f/logo.png?updatedAt=1759633220287" alt="Trendify Logo" width="40" style="display: block;">
+                                <span style="font-size: 28px; font-weight: 700; color: #FFFFFF; line-height: 1;">
+                                    Trendify
+                                </span>
+                            </div>
                         </td>
                     </tr>
                     
