@@ -8,10 +8,8 @@ import { INVESTMENT_GOALS, RISK_TOLERANCE_OPTIONS, PREFERRED_INDUSTRIES } from '
 import FooterLink from '@/components/forms/FooterLink';
 import { signUpWithEmail } from '@/lib/actions/auth.actions';
 import { toast } from 'sonner';
-import { useRouter } from 'next/navigation';
 
 const SignUp = () => {
-  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -35,7 +33,10 @@ const SignUp = () => {
       const result = await signUpWithEmail(data);
       if (result.success) {
         toast.success('Inscription réussie');
-        router.push('/');
+        // Forcer un rechargement complet pour s'assurer que la session est bien chargée
+        window.location.href = '/';
+      } else if (result.error) {
+        throw new Error(result.error);
       }
     } catch (e) {
       console.error(e);
