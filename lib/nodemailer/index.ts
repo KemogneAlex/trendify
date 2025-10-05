@@ -12,7 +12,7 @@ export const sendWelcomeEmail = async ({ email, name, intro }: WelcomeEmailData)
   const htmlTemplate = WELCOME_EMAIL_TEMPLATE.replace('{{name}}', name).replace('{{intro}}', intro);
 
   const mailOptions = {
-    from: `"Trendify" <noreply@trendify.com>`,
+    from: '"Trendify" <kemognemalone@gmail.com>',
     to: email,
     subject: `Bienvenue sur Trendify - votre outil boursier est prêt !`,
     text: 'Merci de rejoindre Trendify',
@@ -36,7 +36,7 @@ export const sendNewsSummaryEmail = async ({
   );
 
   const mailOptions = {
-    from: `"Actualités Trendify" <noreply@trendify.com>`,
+    from: '"Actualités Trendify" <kemognemalone@gmail.com>',
     to: email,
     subject: `📈 Résumé des actualités du marché - ${date}`,
     text: `Voici le résumé des actualités boursières du jour de Trendify`,
