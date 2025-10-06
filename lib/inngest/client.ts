@@ -12,7 +12,7 @@ const baseConfig = {
 const config = {
   ...baseConfig,
   // URL racine du site (Inngest ajoutera automatiquement /api/inngest)
-  baseUrl: 'https://trendify-beryl.vercel.app',
+  baseUrl: 'https://trendify-beryl.vercel.app/api/inngest',
 
   // Activation du mode debug pour plus d'informations
   debug: true,
