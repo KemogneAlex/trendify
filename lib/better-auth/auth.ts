@@ -27,7 +27,8 @@ export const getAuth = async () => {
       autoSignIn: true,
     },
     plugins: [nextCookies()],
-  });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  }) as any;
 
   return authInstance;
 };
