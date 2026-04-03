@@ -85,6 +85,7 @@ const SignUp = () => {
         <CountrySelectField
           name='country'
           label='Pays'
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           control={control as Control<any>}
           error={errors.country}
           required
@@ -94,6 +95,7 @@ const SignUp = () => {
           label="Objectifs d'investissement"
           placeholder="Sélectionnez votre objectif d'investissement"
           options={INVESTMENT_GOALS}
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           control={control as Control<any>}
           error={errors.investmentGoals}
           required
@@ -103,6 +105,7 @@ const SignUp = () => {
           label='Tolérance au risque'
           placeholder='Sélectionnez votre niveau de risque'
           options={RISK_TOLERANCE_OPTIONS}
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           control={control as Control<any>}
           error={errors.riskTolerance}
           required
@@ -112,6 +115,7 @@ const SignUp = () => {
           label='Secteur préféré'
           placeholder='Sélectionnez votre secteur préféré'
           options={PREFERRED_INDUSTRIES}
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           control={control as Control<any>}
           error={errors.preferredIndustry}
           required
