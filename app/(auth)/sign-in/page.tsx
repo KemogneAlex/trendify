@@ -28,6 +28,10 @@ const SignIn = () => {
       if (result.success) {
         toast.success('Connexion réussie');
         router.push('/');
+      } else {
+        toast.error('Échec de la connexion', {
+          description: result.error || 'Email ou mot de passe incorrect.',
+        });
       }
     } catch (e) {
       console.error(e);

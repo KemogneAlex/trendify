@@ -65,10 +65,15 @@ export const signUpWithEmail = async ({
     });
 
     if (response) {
-      await inngest.send({
-        name: 'app/user.created',
-        data: { email, name: fullName, country, investmentGoals, riskTolerance, preferredIndustry },
-      });
+      try {
+        await inngest.send({
+          name: 'app/user.created',
+          data: { email, name: fullName, country, investmentGoals, riskTolerance, preferredIndustry },
+        });
+      } catch (inngestError) {
+        console.log('Erreur Inngest (non bloquante):', inngestError);
+        // On continue même si Inngest échoue - l'utilisateur est déjà créé
+      }
     }
 
     const result: ApiResponse<AuthResponse> = {
@@ -152,9 +157,20 @@ export const signInWithEmail = async ({ email, password }: SignInFormData): Prom
     return result;
   } catch (e: unknown) {
     console.log('Échec de la connexion', e);
+    
+    // Traduire les messages d'erreur de Better Auth en français
+    let errorMessage = 'Échec de la connexion';
+    if (e instanceof Error) {
+      if (e.message.includes('Invalid email or password')) {
+        errorMessage = 'Email ou mot de passe incorrect.';
+      } else {
+        errorMessage = e.message;
+      }
+    }
+    
     return {
       success: false,
-      error: e instanceof Error ? e.message : 'Échec de la connexion',
+      error: errorMessage,
     };
   }
 };
