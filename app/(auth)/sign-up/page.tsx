@@ -1,5 +1,5 @@
 'use client';
-import { useForm } from 'react-hook-form';
+import { useForm, Control } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import InputField from '@/components/forms/InputField';
 import { CountrySelectField } from '@/components/forms/CountrySelectField';
@@ -85,7 +85,7 @@ const SignUp = () => {
         <CountrySelectField
           name='country'
           label='Pays'
-          control={control}
+          control={control as Control<any>}
           error={errors.country}
           required
         />
@@ -94,7 +94,7 @@ const SignUp = () => {
           label="Objectifs d'investissement"
           placeholder="Sélectionnez votre objectif d'investissement"
           options={INVESTMENT_GOALS}
-          control={control}
+          control={control as Control<any>}
           error={errors.investmentGoals}
           required
         />
@@ -103,7 +103,7 @@ const SignUp = () => {
           label='Tolérance au risque'
           placeholder='Sélectionnez votre niveau de risque'
           options={RISK_TOLERANCE_OPTIONS}
-          control={control}
+          control={control as Control<any>}
           error={errors.riskTolerance}
           required
         />
@@ -112,7 +112,7 @@ const SignUp = () => {
           label='Secteur préféré'
           placeholder='Sélectionnez votre secteur préféré'
           options={PREFERRED_INDUSTRIES}
-          control={control}
+          control={control as Control<any>}
           error={errors.preferredIndustry}
           required
         />
