@@ -51,7 +51,7 @@ export const signUpWithEmail = async ({
   preferredIndustry,
 }: SignUpFormData): Promise<ApiResponse<AuthResponse>> => {
   try {
-    const response = await auth.api.signUpEmail({
+    const response = await auth?.api.signUpEmail({
       body: {
         email,
         password,
@@ -120,7 +120,7 @@ export const signUpWithEmail = async ({
 
 export const signInWithEmail = async ({ email, password }: SignInFormData): Promise<ApiResponse<AuthResponse>> => {
   try {
-    const response = await auth.api.signInEmail({
+    const response = await auth?.api.signInEmail({
       body: { 
         email, 
         password,
@@ -177,7 +177,7 @@ export const signInWithEmail = async ({ email, password }: SignInFormData): Prom
 
 export const signOut = async (): Promise<{ success: boolean; error?: string }> => {
   try {
-    await auth.api.signOut({ headers: await headers() });
+    await auth?.api.signOut({ headers: await headers() });
     return { success: true };
   } catch (e) {
     console.log('Échec de la déconnexion', e);
